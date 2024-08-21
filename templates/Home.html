@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+</head>
+<body>
+    <h1 class="ui header" style="text-align: center;">Regular blogs</h1><hr>
+    <form class="ui form" action="/Blogs" method="POST">
+        <div class="field">
+            <label for="title">Title of the story</label>
+            <input type="text" name="title" id="title" placeholder="Add new todo">
+            <label for="text">The body of the blog</label>
+            <input type="text" name="text" id="text" placeholder="text">
+            <label for="image">image link for blog</label>
+            <input type="text" name="image" id="image" placeholder="image link">
+
+        </div>
+        <button class="ui blue button" type="submit">Add</button>
+    </form>
+    
+</body>
+</html>
