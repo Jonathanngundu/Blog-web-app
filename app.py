@@ -1,4 +1,4 @@
-from flask import Flask, render_template,request
+from flask import Flask, render_template,request,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -23,14 +23,22 @@ with app.app_context():
 def home():
     return render_template("Home.html")
 
-@app.route("/Blogs",methods=["GET", "POST"])
+@app.route("/Blogs", methods=["GET", "POST"])
 def all_blogs():
-    title = request.form.get('title')
-    text = request.form.get('text')
-    image = request.form.get('image')
-    new_title = blogs(Title=title, Text=text, Image_link=image)
-    db.session.add(new_title)
-    db.session.commit()
+    title = None
+    text = None
+    image = None
+    
+    if request.method == "POST":
+        title = request.form.get('title')
+        text = request.form.get('text')
+        image = request.form.get('image')
+        
+        if title and text and image:
+            new_title = blogs(Title=title, Text=text, Image_link=image)
+            db.session.add(new_title)
+            db.session.commit()
+    
     blog_new = blogs.query.all()
     return render_template("Blogs.html", blog_new=blog_new)
 
@@ -39,3 +47,14 @@ def inv(blogs_id):
     blog_new = blogs.query.get(blogs_id)
     db.session.commit()
     return render_template("inv.html", blog_new=blog_new)
+
+@app.route("/delete/<int:blogs_id>", methods=["POST"])
+def delete(blogs_id):
+    blog_delete = blogs.query.get(blogs_id)
+    if blog_delete:
+        db.session.delete(blog_delete)
+        db.session.commit()
+        return redirect(url_for("all_blogs"))
+    else:
+        # Handle the case where the blog does not exist
+        return "Blog not found", 404
