@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='style.css') }}"/>
 </head>
 <body>
-    <h1 class="ui header" style="text-align: center;">Regular blogs</h1><hr>
+    <nav>
+        <h1 class="ui header" style="text-align: center;">Regular blogs</h1><hr>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/Blogs">Blogs</a></li>
+        </ul>
+    </nav>
     <form class="ui form" action="/Blogs" method="POST">
         <div class="field">
             <label for="title">Title of the story</label>
-            <input type="text" name="title" id="title" placeholder="Add new todo">
+            <input type="text" name="title" id="title" placeholder="Add new title">
             <label for="text">The body of the blog</label>
             <input type="text" name="text" id="text" placeholder="text">
             <label for="image">image link for blog</label>
